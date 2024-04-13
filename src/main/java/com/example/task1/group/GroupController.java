@@ -18,7 +18,6 @@ public class GroupController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('CREATE')")
     public ResponseEntity<GroupResponseDto> createGroup(@RequestBody GroupCreateDto groupCreateDto) {
 
         GroupResponseDto groupResponseDto = groupService.create(groupCreateDto);
@@ -27,7 +26,6 @@ public class GroupController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('GET_ALL')")
     public ResponseEntity<Page<GroupResponseDto>> getALl(Pageable pageable) {
 
         Page<GroupResponseDto> page = groupService.getAll(pageable);
@@ -35,7 +33,6 @@ public class GroupController {
     }
 
     @DeleteMapping
-    @PreAuthorize("hasAuthority('DELETE')")
     public ResponseEntity<?> delete(@RequestParam Integer id) {
         groupService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Deleted group with id " + id);
